@@ -285,7 +285,9 @@ class ItemListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Lógica para obter a lista de itens da categoria
-    List<Item> items = [Item(name: 'Item 1', price: 'R\$ 9,99'), Item(name: 'Item 2', price: 'R\$ 14,99'), Item(name: 'Item 3', price: 'R\$ 19,99') ];
+    List<Item> items = [Item(name: 'Item 1', price: 'R\$ 9,99', image:'images/fastfood.png'),
+                        Item(name: 'Item 2', price: 'R\$ 14,99', image:'images/fastfood.png'),
+                        Item(name: 'Item 3', price: 'R\$ 19,99', image:'images/fastfood.png') ];
 
     return Scaffold(
       appBar: AppBar(
@@ -293,19 +295,24 @@ class ItemListScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 230, 124, 3),
       ),
       body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          Item item = items[index];
-          return ListTile(
-            title: Text(item.name),
-            subtitle: Text(item.price),
-            // Lógica para navegar para a tela de detalhes do item ao pressionar
-            onTap: () {
-              
-            },
-          );
-        },
-      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        Item item = items[index];
+        return ListTile(
+          leading: Image.asset(
+            item.image,
+            width: 40.0,
+            height: 40.0,
+          ),
+      title: Text(item.name),
+      subtitle: Text(item.price),
+      onTap: () {
+        // Lógica para mostrar detalhes do item
+      },
+    );
+  },
+),
+
     );
   }
 }
@@ -313,9 +320,10 @@ class ItemListScreen extends StatelessWidget {
 class Item {
   final String name;
   final String price;
+  final String image;
   // Outras propriedades do item, como imagem, descrição, etc.
 
-  Item({required this.name, required this.price});
+  Item({required this.name, required this.price, required this.image});
 }
 
 
