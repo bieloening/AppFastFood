@@ -284,10 +284,35 @@ class ItemListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Lógica para obter a lista de itens da categoria
-    List<Item> items = [Item(name: 'Item 1', price: 'R\$ 9,99', image:'images/fastfood.png'),
-                        Item(name: 'Item 2', price: 'R\$ 14,99', image:'images/fastfood.png'),
-                        Item(name: 'Item 3', price: 'R\$ 19,99', image:'images/fastfood.png') ];
+    List<Item> items;
+
+    if (category == 'Fast Food') {
+      items = [
+        Item(name: 'Hambúrguer', price: 'R\$ 9,99', image: 'images/lanche.png'),
+        Item(name: 'Batata Frita', price: 'R\$ 4,99', image: 'images/batata_frita.png'),
+        Item(name: 'Refrigerante', price: 'R\$ 3,99', image: 'images/refrigerante.png'),
+      ];
+    } else if (category == 'Pizzas') {
+      items = [
+        Item(name: 'Pizza de Calabresa', price: 'R\$ 19,99', image: 'images/pizza_calabresa.png'),
+        Item(name: 'Pizza de Mussarela', price: 'R\$ 18,99', image: 'images/pizza_mussarela.png'),
+        Item(name: 'Pizza de Frango', price: 'R\$ 17,99', image: 'images/pizza_frango.png'),
+      ];
+    } else if (category == 'Bolos') {
+      items = [
+        Item(name: 'Bolo de Chocolate', price: 'R\$ 24,99', image: 'images/bolo_chocolate.png'),
+        Item(name: 'Bolo de Morango', price: 'R\$ 22,99', image: 'images/bolo_morango.png'),
+        Item(name: 'Bolo de Cenoura', price: 'R\$ 20,99', image: 'images/bolo_cenoura.png'),
+      ];
+    } else if (category == 'Outros') {
+      items = [
+        Item(name: 'Salada Mista', price: 'R\$ 12,99', image: 'images/salada_mista.png'),
+        Item(name: 'Sopa de Legumes', price: 'R\$ 9,99', image: 'images/sopa_legumes.png'),
+        Item(name: 'Sanduíche Natural', price: 'R\$ 8,99', image: 'images/sanduiche_natural.png'),
+      ];
+    } else {
+      items = []; // Caso a categoria não seja encontrada, uma lista vazia será exibida
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -295,24 +320,23 @@ class ItemListScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 230, 124, 3),
       ),
       body: ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        Item item = items[index];
-        return ListTile(
-          leading: Image.asset(
-            item.image,
-            width: 40.0,
-            height: 40.0,
-          ),
-      title: Text(item.name),
-      subtitle: Text(item.price),
-      onTap: () {
-        // Lógica para mostrar detalhes do item
-      },
-    );
-  },
-),
-
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          Item item = items[index];
+          return ListTile(
+            leading: Image.asset(
+              item.image,
+              width: 40.0,
+              height: 40.0,
+            ),
+            title: Text(item.name),
+            subtitle: Text(item.price),
+            onTap: () {
+              // Lógica para mostrar detalhes do item
+            },
+          );
+        },
+      ),
     );
   }
 }
